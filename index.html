@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Smart QR Code Generator</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>🔳 Smart QR Code Generator</h1>
+    <input type="text" id="qr-input" placeholder="Masukkan teks, URL, atau nomor HP..." />
+    
+    <div class="options">
+      <label>Warna QR:</label>
+      <input type="color" id="qr-color" value="#000000" />
+    </div>
+
+    <div class="info-box" id="auto-info"></div>
+
+    <div id="qr-code"></div>
+
+    <button id="download-btn">Download PNG</button>
+
+    <h2>Riwayat</h2>
+    <ul id="history-list"></ul>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
