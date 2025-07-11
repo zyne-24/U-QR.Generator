@@ -216,6 +216,7 @@ toggleHistory.addEventListener("click", () => {
 
 // Theme toggle: dark/light
 themeToggle.addEventListener('click', () => {
+  const icon = themeToggle.querySelector('i');
   document.body.classList.toggle('dark-theme');
 
   if (document.body.classList.contains('dark-theme')) {
@@ -226,6 +227,7 @@ themeToggle.addEventListener('click', () => {
     icon.classList.add('fa-moon');
   }
 });
+
 
 // Initialize UI and render history on page load
 document.addEventListener("DOMContentLoaded", () => {
