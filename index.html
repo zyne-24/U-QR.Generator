@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -8,25 +8,38 @@
 </head>
 <body>
   <div class="container">
-    <h1>🔳 Smart QR Code Generator</h1>
-    <input type="text" id="qr-input" placeholder="Masukkan teks, URL, atau nomor HP..." />
-    
+    <!-- Title -->
+    <h1>QR Code Generator | zyne </h1>
+
+    <!-- Input field for text, link, or phone number -->
+    <input type="text" id="qr-input" placeholder="Enter text, URL, or phone number..." />
+
+    <!-- Button to generate QR -->
+    <button id="generate-btn">Generate QR</button>
+
+    <!-- Color picker for QR code color -->
     <div class="options">
-      <label>Warna QR:</label>
+      <label>QR Color:</label>
       <input type="color" id="qr-color" value="#000000" />
     </div>
 
+    <!-- Area that shows info about detected content -->
     <div class="info-box" id="auto-info"></div>
 
+    <!-- QR Code container -->
     <div id="qr-code"></div>
 
+    <!-- Button to download QR code as image -->
     <button id="download-btn">Download PNG</button>
 
-    <h2>Riwayat</h2>
+    <!-- History of generated QR codes -->
+    <h2>History</h2>
     <ul id="history-list"></ul>
   </div>
 
+  <!-- QRCode.js library -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <!-- Main JavaScript -->
   <script src="script.js"></script>
 </body>
 </html>
