@@ -215,16 +215,16 @@ toggleHistory.addEventListener("click", () => {
 });
 
 // Theme toggle: dark/light
-themeToggle.addEventListener("click", () => {
-  const html = document.documentElement;
-  if (html.getAttribute("data-theme") === "dark") {
-    html.setAttribute("data-theme", "light");
-    themeToggle.textContent = "🌞";
+themeToggle.addEventListener('click', () => {
+  document.body.classList.toggle('dark-theme');
+
+  if (document.body.classList.contains('dark-theme')) {
+    icon.classList.remove('fa-moon');
+    icon.classList.add('fa-sun');
   } else {
-    html.setAttribute("data-theme", "dark");
-    themeToggle.textContent = "🌓";
+    icon.classList.remove('fa-sun');
+    icon.classList.add('fa-moon');
   }
-  themeToggle.blur();
 });
 
 // Initialize UI and render history on page load
