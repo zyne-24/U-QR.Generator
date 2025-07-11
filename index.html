@@ -30,11 +30,18 @@
     <div class="info" id="auto-info" style="margin-top: 0.5rem; color: #bbb;"></div>
     <button id="generate-btn">Generate QR</button>
 
-    <label for="qr-color">QR Color</label>
-    <input type="color" id="qr-color" value="#000000" />
+    <div class="grid" style="grid-template-columns: 1fr 2fr; gap: 1rem;">
+      <div>
+        <label for="qr-color">QR Color</label>
+        <input type="color" id="qr-color" value="#000000" />
+      </div>
 
-    <label for="qr-size">QR Size: <span id="size-display">300px</span></label>
-    <input type="range" id="qr-size" min="100" max="500" value="300" />
+      <div>
+        <label for="qr-size">QR Size: <span id="size-display">300px</span></label>
+        <input type="range" id="qr-size" min="100" max="500" value="300" />
+      </div>
+    </div>
+
 
     <label for="logo-upload">Upload Logo (max 100x100 px)</label>
     <input type="file" id="logo-upload" accept="image/*" />
