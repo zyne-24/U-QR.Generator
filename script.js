@@ -36,7 +36,7 @@ qrCode = new QRCodeStyling({
     type: "rounded"
   },
   backgroundOptions: {
-    color: "#transparent"
+    color: "transparent"
   },
   imageOptions: {
     crossOrigin: "anonymous",
