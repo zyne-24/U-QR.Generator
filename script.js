@@ -1,4 +1,4 @@
-// Elements references
+// Element references
 const input = document.getElementById("qr-input");
 const generateBtn = document.getElementById("generate-btn");
 const downloadBtn = document.getElementById("download-btn");
@@ -18,7 +18,7 @@ let qrCode;
 let uploadedLogo = null;
 let currentSize = parseInt(sizeSlider.value);
 
-// Template logos URLs
+// Template logo URLs
 const templates = {
   wa: "https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg",
   ig: "https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png",
@@ -26,7 +26,7 @@ const templates = {
   web: "https://upload.wikimedia.org/wikipedia/commons/8/89/OOjs_UI_icon_globe.svg"
 };
 
-// Initialize QR Code Styling instance
+// Init QR Code
 qrCode = new QRCodeStyling({
   width: currentSize,
   height: currentSize,
@@ -41,35 +41,46 @@ qrCode = new QRCodeStyling({
   imageOptions: {
     crossOrigin: "anonymous",
     margin: 10,
-    imageSize: 0.2 // 20% of QR size for logo
+    imageSize: 0.2
   }
 });
 
-// Function to resize uploaded logo to 100x100 max
+// Resize uploaded logo to max 100x100 px
 function resizeImage(file, callback) {
   const reader = new FileReader();
   const img = new Image();
   reader.onload = e => {
     img.onload = () => {
       const canvas = document.createElement("canvas");
-      const ctx = canvas.getContext("2d");
-
       canvas.width = 100;
       canvas.height = 100;
-
-      // Clear canvas & draw resized image
+      const ctx = canvas.getContext("2d");
       ctx.clearRect(0, 0, 100, 100);
       ctx.drawImage(img, 0, 0, 100, 100);
-
-      const dataUrl = canvas.toDataURL("image/png");
-      callback(dataUrl);
+      callback(canvas.toDataURL("image/png"));
     };
     img.src = e.target.result;
   };
   reader.readAsDataURL(file);
 }
 
-// Generate QR code with progress bar animation
+// Show loading bar, then run callback
+function showProgress(callback) {
+  progressBar.style.display = "block";
+  progressBar.value = 0;
+  let val = 0;
+  const interval = setInterval(() => {
+    val += 10;
+    progressBar.value = val;
+    if (val >= 100) {
+      clearInterval(interval);
+      progressBar.style.display = "none";
+      callback();
+    }
+  }, 40);
+}
+
+// Generate QR Code
 function generateQR() {
   const text = input.value.trim();
   if (!text) return;
@@ -82,7 +93,10 @@ function generateQR() {
       data: text,
       width: currentSize,
       height: currentSize,
-      dotsOptions: { color: colorPicker.value },
+      dotsOptions: {
+        color: colorPicker.value,
+        type: "rounded"
+      },
       image: uploadedLogo
     });
 
@@ -91,45 +105,29 @@ function generateQR() {
   });
 }
 
-// Progress bar animation helper
-function showProgress(callback) {
-  progressBar.style.display = "block";
-  progressBar.value = 0;
-  let value = 0;
-  const interval = setInterval(() => {
-    value += 10;
-    progressBar.value = value;
-    if (value >= 100) {
-      clearInterval(interval);
-      progressBar.style.display = "none";
-      callback();
-    }
-  }, 40);
-}
-
-// Detect input content type and update info text
+// Detect input content and show info
 function detectContent(text) {
   if (/^https?:\/\//i.test(text)) {
     autoInfo.textContent = "🔗 Detected URL.";
   } else if (/^\d{9,}$/.test(text)) {
-    autoInfo.innerHTML = `📞 Phone number detected. <br>Click <a href="https://wa.me/${text}" target="_blank" rel="noopener noreferrer">open WhatsApp</a>`;
+    autoInfo.innerHTML = `📞 Phone number detected.<br><a href="https://wa.me/${text}" target="_blank">Open WhatsApp</a>`;
   } else {
     autoInfo.textContent = "📝 Plain text.";
   }
 }
 
-// Save to localStorage history and render list
+// Save text to history (localStorage)
 function saveToHistory(text) {
   let history = JSON.parse(localStorage.getItem("qrHistory")) || [];
   if (!history.includes(text)) {
     history.unshift(text);
-    if (history.length > 10) history.pop(); // keep last 10
+    if (history.length > 10) history.pop();
     localStorage.setItem("qrHistory", JSON.stringify(history));
   }
   renderHistory();
 }
 
-// Render history list in UI
+// Render history list
 function renderHistory() {
   const history = JSON.parse(localStorage.getItem("qrHistory")) || [];
   historyList.innerHTML = "";
@@ -139,11 +137,13 @@ function renderHistory() {
     li.tabIndex = 0;
     li.addEventListener("click", () => {
       input.value = item;
+      detectContent(item);
       generateQR();
     });
     li.addEventListener("keypress", e => {
       if (e.key === "Enter") {
         input.value = item;
+        detectContent(item);
         generateQR();
       }
     });
@@ -151,21 +151,23 @@ function renderHistory() {
   });
 }
 
-// Download QR code as PNG with custom filename
+// Download QR PNG with custom name
 function downloadQR() {
   qrCode.getRawData("png").then(blob => {
     const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = "qrcode | zyne.png";
-    document.body.appendChild(a);
-    a.click();
-    a.remove();
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = "qrcode | zyne.png";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
     URL.revokeObjectURL(url);
   });
 }
 
-// Upload logo and resize it
+// ========== EVENT LISTENERS ==========
+
+// Upload custom logo
 logoUpload.addEventListener("change", e => {
   const file = e.target.files[0];
   if (!file) return;
@@ -175,16 +177,16 @@ logoUpload.addEventListener("change", e => {
   });
 });
 
-// Template logos buttons
-document.querySelectorAll(".template-btn").forEach(button => {
-  button.addEventListener("click", () => {
-    const logoKey = button.getAttribute("data-logo");
+// Use template logo
+document.querySelectorAll(".template-btn").forEach(btn => {
+  btn.addEventListener("click", () => {
+    const logoKey = btn.getAttribute("data-logo");
     uploadedLogo = templates[logoKey];
     generateQR();
   });
 });
 
-// QR size slider change
+// Slider update size
 sizeSlider.addEventListener("input", () => {
   currentSize = parseInt(sizeSlider.value);
   sizeDisplay.textContent = `${currentSize}px`;
@@ -193,50 +195,47 @@ sizeSlider.addEventListener("input", () => {
   }
 });
 
-// Color picker change
+// Recolor QR
 colorPicker.addEventListener("input", () => {
   if (input.value.trim()) {
     generateQR();
   }
 });
 
-// Generate button click
+// Generate on button
 generateBtn.addEventListener("click", generateQR);
+
+// Realtime detect content
 input.addEventListener("input", () => {
   const text = input.value.trim();
   detectContent(text);
 });
 
-
-// Download button click
+// Download QR
 downloadBtn.addEventListener("click", downloadQR);
 
-// History toggle
+// Toggle history
 toggleHistory.addEventListener("click", () => {
-  const isHidden = historyContainer.style.display === "none";
-  historyContainer.style.display = isHidden ? "block" : "none";
-  toggleHistory.textContent = isHidden ? "📜 Hide History" : "📜 Show History";
-  toggleHistory.setAttribute("aria-expanded", isHidden);
+  const hidden = historyContainer.style.display === "none";
+  historyContainer.style.display = hidden ? "block" : "none";
+  toggleHistory.textContent = hidden ? "📜 Hide History" : "📜 Show History";
+  toggleHistory.setAttribute("aria-expanded", hidden);
 });
 
-// Theme toggle: dark/light
-themeToggle.addEventListener('click', () => {
-  const icon = themeToggle.querySelector('i');
+// Toggle theme (dark/light)
+themeToggle.addEventListener("click", () => {
+  const icon = themeToggle.querySelector("i");
   const html = document.documentElement;
-  const currentTheme = html.getAttribute('data-theme');
+  const isDark = html.getAttribute("data-theme") === "dark";
 
-  if (currentTheme === 'dark') {
-    html.setAttribute('data-theme', 'light');
-    icon.classList.replace('fa-moon', 'fa-sun');
-  } else {
-    html.setAttribute('data-theme', 'dark');
-    icon.classList.replace('fa-sun', 'fa-moon');
-  }
+  html.setAttribute("data-theme", isDark ? "light" : "dark");
+  icon.classList.toggle("fa-moon", !isDark);
+  icon.classList.toggle("fa-sun", isDark);
 });
 
-
-// Initialize UI and render history on page load
+// Init page
 document.addEventListener("DOMContentLoaded", () => {
   sizeDisplay.textContent = `${currentSize}px`;
   renderHistory();
+  detectContent(input.value.trim());
 });
