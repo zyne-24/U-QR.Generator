@@ -202,6 +202,11 @@ colorPicker.addEventListener("input", () => {
 
 // Generate button click
 generateBtn.addEventListener("click", generateQR);
+input.addEventListener("input", () => {
+  const text = input.value.trim();
+  detectContent(text);
+});
+
 
 // Download button click
 downloadBtn.addEventListener("click", downloadQR);
