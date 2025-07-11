@@ -30,6 +30,7 @@
     <h1>🔳 Smart QR Code Generator</h1>
 
     <input type="text" id="qr-input" placeholder="Enter text, URL, or phone number..." autocomplete="off" />
+    <div class="info" id="auto-info" style="margin-top: 0.5rem; color: #bbb;"></div>
     <button id="generate-btn">Generate QR</button>
 
     <label for="qr-color">QR Color</label>
@@ -54,7 +55,6 @@
     <progress id="progress-bar" value="0" max="100" style="display:none;"></progress>
 
     <div id="qr-code" class="text-center" style="margin-top: 1rem;"></div>
-    <div class="info" id="auto-info" style="margin-top: 0.5rem; color: #bbb;"></div>
 
     <button id="download-btn">Download PNG</button>
     <button id="toggle-history" aria-expanded="false">📜 Show History</button>
