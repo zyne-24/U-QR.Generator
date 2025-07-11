@@ -217,14 +217,15 @@ toggleHistory.addEventListener("click", () => {
 // Theme toggle: dark/light
 themeToggle.addEventListener('click', () => {
   const icon = themeToggle.querySelector('i');
-  document.body.classList.toggle('dark-theme');
+  const html = document.documentElement;
+  const currentTheme = html.getAttribute('data-theme');
 
-  if (document.body.classList.contains('dark-theme')) {
-    icon.classList.remove('fa-moon');
-    icon.classList.add('fa-sun');
+  if (currentTheme === 'dark') {
+    html.setAttribute('data-theme', 'light');
+    icon.classList.replace('fa-moon', 'fa-sun');
   } else {
-    icon.classList.remove('fa-sun');
-    icon.classList.add('fa-moon');
+    html.setAttribute('data-theme', 'dark');
+    icon.classList.replace('fa-sun', 'fa-moon');
   }
 });
 
