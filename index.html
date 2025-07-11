@@ -1,45 +1,71 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Smart QR Code Generator</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>QR Generator | Zyne</title>
+  <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@1.5.10/css/pico.min.css" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="container">
-    <!-- Title -->
-    <h1>QR Code Generator | zyne </h1>
 
-    <!-- Input field for text, link, or phone number -->
-    <input type="text" id="qr-input" placeholder="Enter text, URL, or phone number..." />
+  <!-- Navbar -->
+  <nav class="container-fluid">
+    <ul>
+      <li>
+        <a href="#" class="nav-left">
+          <img src="profile.jpg" alt="Zyne" class="avatar" />
+          <strong>Zyne</strong>
+        </a>
+      </li>
+    </ul>
+    <ul>
+      <li><button id="theme-toggle" aria-label="Toggle theme">🌓</button></li>
+      <li><a href="https://github.com/zyne-24" target="_blank" rel="noopener noreferrer">🐙 GitHub</a></li>
+    </ul>
+  </nav>
 
-    <!-- Button to generate QR -->
+  <!-- Main container -->
+  <main class="container text-center">
+    <h1>🔳 Smart QR Code Generator</h1>
+
+    <input type="text" id="qr-input" placeholder="Enter text, URL, or phone number..." autocomplete="off" />
     <button id="generate-btn">Generate QR</button>
 
-    <!-- Color picker for QR code color -->
-    <div class="options">
-      <label>QR Color:</label>
-      <input type="color" id="qr-color" value="#000000" />
-    </div>
+    <label for="qr-color">QR Color</label>
+    <input type="color" id="qr-color" value="#000000" />
 
-    <!-- Area that shows info about detected content -->
-    <div class="info-box" id="auto-info"></div>
+    <label for="qr-size">QR Size: <span id="size-display">300px</span></label>
+    <input type="range" id="qr-size" min="100" max="500" value="300" />
 
-    <!-- QR Code container -->
-    <div id="qr-code"></div>
+    <label for="logo-upload">Upload Logo (max 100x100 px)</label>
+    <input type="file" id="logo-upload" accept="image/*" />
 
-    <!-- Button to download QR code as image -->
+    <details>
+      <summary>Use Template Logo</summary>
+      <div id="logo-templates">
+        <button class="template-btn" data-logo="wa" aria-label="WhatsApp logo">WhatsApp</button>
+        <button class="template-btn" data-logo="ig" aria-label="Instagram logo">Instagram</button>
+        <button class="template-btn" data-logo="fb" aria-label="Facebook logo">Facebook</button>
+        <button class="template-btn" data-logo="web" aria-label="Website logo">Website</button>
+      </div>
+    </details>
+
+    <progress id="progress-bar" value="0" max="100" style="display:none;"></progress>
+
+    <div id="qr-code" class="text-center" style="margin-top: 1rem;"></div>
+    <div class="info" id="auto-info" style="margin-top: 0.5rem; color: #bbb;"></div>
+
     <button id="download-btn">Download PNG</button>
+    <button id="toggle-history" aria-expanded="false">📜 Show History</button>
 
-    <!-- History of generated QR codes -->
-    <h2>History</h2>
-    <ul id="history-list"></ul>
-  </div>
+    <section id="history-container" style="display:none; margin-top: 1rem;">
+      <h3>History</h3>
+      <ul id="history-list"></ul>
+    </section>
+  </main>
 
-  <!-- QRCode.js library -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-  <!-- Main JavaScript -->
+  <script src="https://cdn.jsdelivr.net/npm/qr-code-styling@1.5.0/lib/qr-code-styling.js"></script>
   <script src="script.js"></script>
 </body>
 </html>

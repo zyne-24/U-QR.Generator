@@ -1,1 +1,96 @@
+/* Navbar styling */
+nav.container-fluid {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  background-color: var(--background-contrast);
+}
 
+/* Left nav item: profile pic + name */
+.nav-left {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--text-primary);
+  text-decoration: none;
+}
+
+.avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--primary);
+}
+
+/* Logo templates container */
+#logo-templates {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin: 0.5rem 0;
+}
+
+/* Buttons for template logos */
+.template-btn {
+  cursor: pointer;
+  padding: 0.3rem 0.6rem;
+  border: 1px solid var(--primary);
+  border-radius: 0.3rem;
+  background-color: transparent;
+  color: var(--primary);
+  transition: background-color 0.3s ease;
+}
+.template-btn:hover,
+.template-btn:focus {
+  background-color: var(--primary);
+  color: var(--background);
+  outline: none;
+}
+
+/* History list styling */
+#history-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  max-height: 200px;
+  overflow-y: auto;
+  border: 1px solid var(--background-contrast);
+  border-radius: 0.3rem;
+  background-color: var(--background);
+}
+
+#history-list li {
+  padding: 0.4rem 0.6rem;
+  cursor: pointer;
+  border-bottom: 1px solid var(--background-contrast);
+  color: var(--text-primary);
+}
+#history-list li:hover,
+#history-list li:focus {
+  background-color: var(--primary);
+  color: var(--background);
+  outline: none;
+}
+
+/* Center QR container */
+#qr-code {
+  margin: 1.5rem auto;
+  text-align: center;
+}
+
+/* Progress bar styling */
+#progress-bar {
+  width: 100%;
+  max-width: 400px;
+  margin: 0.5rem auto 1rem auto;
+}
+
+/* Responsive and spacing */
+main.container {
+  max-width: 600px;
+  margin-top: 2rem;
+  text-align: center;
+}
