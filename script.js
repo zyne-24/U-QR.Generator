@@ -36,7 +36,7 @@ qrCode = new QRCodeStyling({
     type: "rounded"
   },
   backgroundOptions: {
-    color: "#fff"
+    color: "#transparent"
   },
   imageOptions: {
     crossOrigin: "anonymous",
@@ -224,6 +224,7 @@ themeToggle.addEventListener("click", () => {
     html.setAttribute("data-theme", "dark");
     themeToggle.textContent = "🌓";
   }
+  themeToggle.blur();
 });
 
 // Initialize UI and render history on page load
