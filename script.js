@@ -91,7 +91,7 @@ downloadBtn.addEventListener('click', () => {
   if (!img) return;
   const link = document.createElement('a');
   link.href = img.src;
-  link.download = 'qrcode.png';
+  link.download = 'qrcode_zyne.png';
   link.click();
 });
 
