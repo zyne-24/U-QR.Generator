@@ -7,15 +7,6 @@ nav.container-fluid {
   background-color: var(--background-contrast);
 }
 
-/* Left nav item: profile pic + name */
-.nav-left {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  color: var(--text-primary);
-  text-decoration: none;
-}
-
 .avatar {
   width: 36px;
   height: 36px;
