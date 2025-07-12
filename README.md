@@ -113,5 +113,3 @@ Created by [Zyne](https://github.com/zyne-24)
 ## 📄 License
 
 This project is licensed under the MIT License — see the [LICENSE](LICENSE) file for details.
-
-Let me know if you'd like me to turn this into a GitHub repository with a live demo (GitHub Pages) as well.
