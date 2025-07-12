@@ -6,7 +6,7 @@ A modern, responsive QR Code Generator built with HTML, CSS (PicoCSS), and JavaS
 
 | Dark Mode                        | Light Mode                        |
 | -------------------------------- | --------------------------------- |
-| ![](https://your-image-dark.png) | ![](https://your-image-light.png) |
+| ![](./dark.jpg) | ![](./light.jpg) |
 
 
 ## 🚀 Features
