@@ -1,4 +1,4 @@
-# 📱 QR Code Generator | Zyne
+# QR Code Generator | Zyne
 
 A modern, responsive QR Code Generator built with HTML, CSS (PicoCSS), and JavaScript. Customize QR codes with color, size, and embedded logos. Includes auto-detection of content type and a local history feature for recent QR codes.
 
@@ -13,7 +13,7 @@ A modern, responsive QR Code Generator built with HTML, CSS (PicoCSS), and JavaS
 
 * 🔗 Auto-detects URLs, phone numbers, or plain text
 * 🎨 Customize QR color and size
-* 📷 Upload custom logo or use built-in templates (WhatsApp, Instagram, Facebook, etc.)
+* 📷 Upload custom logo or image
 * 💾 Local storage support for QR history (last 10 entries)
 * 🌗 Toggle between dark and light theme
 * 📥 Download QR codes as PNG
@@ -24,7 +24,7 @@ A modern, responsive QR Code Generator built with HTML, CSS (PicoCSS), and JavaS
 1. Visit this site [QR Code Generator | Zyne](https://zyne-24.github.io/qr-code-generator/)
 2. Enter any **text**, **URL**, or **phone number** in the input field.
 3. Adjust **color** and **size** as desired.
-4. (Optional) Upload a **custom logo** or choose a **preset logo**.
+4. Upload your **custom logo** (Optional).
 5. Click **Generate QR** to create the code.
 6. Click **Download PNG** to save the QR code image.
 7. Use **📜 Show History** to review and reuse previously generated QR codes.
