@@ -1,6 +1,6 @@
 # QR Code Generator | Zyne
 
-A modern, responsive QR Code Generator built with HTML, CSS (PicoCSS), and JavaScript. Customize QR codes with color, size, and embedded logos. Includes auto-detection of content type and a local history feature for recent QR codes.
+A modern, responsive QR Code Generator built with HTML, CSS ([PicoCSS](https://picocss.com/)), and JavaScript. Customize QR codes with color, size, and embedded logos. Includes auto-detection of content type and a local history feature for recent QR codes.
 
 ## 🖼️ Screenshots
 
